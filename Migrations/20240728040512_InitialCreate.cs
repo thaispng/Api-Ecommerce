@@ -17,8 +17,8 @@ namespace EcommerceApi.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Email = table.Column<string>(type: "text", nullable: true),
-                    Senha = table.Column<string>(type: "text", nullable: true)
+                    Email = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "character varying(32)", maxLength: 32, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,9 +31,10 @@ namespace EcommerceApi.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Nome = table.Column<string>(type: "text", nullable: true),
-                    Preco = table.Column<decimal>(type: "numeric", nullable: false),
-                    Quantidade = table.Column<int>(type: "integer", nullable: false)
+                    NumeroDoProduto = table.Column<string>(type: "text", nullable: true),
+                    ValorDoProduto = table.Column<decimal>(type: "numeric", nullable: false),
+                    FormaDePagamento = table.Column<string>(type: "text", nullable: false),
+                    Status = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {

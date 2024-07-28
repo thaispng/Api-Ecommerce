@@ -1,13 +1,13 @@
 using EcommerceApi.Enums;
 
-namespace EcommerceApi.Models
+namespace EcommerceApi.DTOs
 {
-    public class Produto
+    public class ProdutoDto
     {
         public int Id { get; set; }
         public string NumeroDoProduto { get; set; }
         public decimal ValorDoProduto { get; set; }
-        public FormaDePagamento FormaDePagamento { get; set; }
-        public Status Status { get; set; }
+        public string FormaDePagamento { get; set; }
+        public string Status { get; set; }
     }
 }
