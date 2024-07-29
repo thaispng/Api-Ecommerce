@@ -10,6 +10,7 @@ public static class ProductMapper
             Id = produto.Id,
             NumeroDoProduto = produto.NumeroDoProduto,
             FormaDePagamento = produto.FormaDePagamento.ToString(),
+            DataCriacao = produto.DataCriacao.ToString("dd/MM/yyyy"),
             ValorDoProduto = produto.ValorDoProduto,
             Status = produto.Status.ToString()
         };

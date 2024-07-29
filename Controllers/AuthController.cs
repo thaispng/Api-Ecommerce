@@ -23,13 +23,48 @@ namespace EcommerceApi.Controllers
 
         public AuthController(EcommerceContext context, IConfiguration configuration)
         {
-            _context = context;
-            _configuration = configuration;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+        }
+
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] LoginDto register)
+        {
+            if (register == null)
+            {
+                return BadRequest(new { message = "Invalid registration data" });
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (await _context.Logins.AnyAsync(u => u.Email == register.Email))
+            {
+                return Conflict(new { message = "Email already exists" });
+            }
+
+            var newUser = new Login
+            {
+                Email = register.Email,
+                Password = register.Password // Make sure to hash the password in a real-world application
+            };
+
+            _context.Logins.Add(newUser);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "Registration successful" });
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] Login login)
+        public async Task<IActionResult> Login([FromBody] LoginDto login)
         {
+            if (login == null)
+            {
+                return BadRequest(new { message = "Invalid login data" });
+            }
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

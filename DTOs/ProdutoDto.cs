@@ -7,6 +7,7 @@ namespace EcommerceApi.DTOs
         public int Id { get; set; }
         public string NumeroDoProduto { get; set; }
         public decimal ValorDoProduto { get; set; }
+        public string DataCriacao { get; set; }
         public string FormaDePagamento { get; set; }
         public string Status { get; set; }
     }
